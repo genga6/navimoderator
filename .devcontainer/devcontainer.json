@@ -1,0 +1,21 @@
+{
+	"name": "spoilbuster",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "spoilbuster",
+	"workspaceFolder": "/workspaces/spoilbuster",
+	"overrideCommand": true,
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"charliermarsh.ruff",
+				"github.copilot",
+				"ms-toolsai.jupyter",
+				"njpwerner.autodocstring",
+                "mhutchie.git-graph",
+                "eamodio.gitlens",
+                "gruntfuggly.todo-tree"
+			]
+		}
+	}
+}

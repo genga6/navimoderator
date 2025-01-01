@@ -1,0 +1,11 @@
+services:
+  spoilbuster:
+    build:
+      context: ../
+      dockerfile: ./.devcontainer/dev.Dockerfile
+    env_file:
+      - ../.env
+    volumes:
+      - ..:/workspaces/spoilbuster:cached
+    environment:
+      - PYTHONPATH=/workspaces/spoilbuster/src
