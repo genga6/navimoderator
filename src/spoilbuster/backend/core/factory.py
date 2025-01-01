@@ -1,7 +1,13 @@
 from spoilbuster.backend.core.node import Node
+from spoilbuster.backend.nodes.youtube_listener_node import YoutubeListenerNode
+from spoilbuster.backend.nodes.game_data_node import GameDataNode
+from spoilbuster.backend.nodes.structured_llm_node import StructuredLLMNode
 
-NODE_MAPPING = {}
-
+NODE_MAPPING = {
+    "youtube_listener_node": YoutubeListenerNode,
+    "game_data_node": GameDataNode,
+    "structured_llm_node": StructuredLLMNode,
+}
 class NodeFactory:
     @staticmethod
     def create_node(node_name: str, **kwargs) -> Node:

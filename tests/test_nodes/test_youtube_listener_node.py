@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 class State(TypedDict):
     video_id: str
-    messages: list[str]
+    youtube_comments: list[str]
     
 
 @pytest.fixture
@@ -20,7 +20,7 @@ def mock_youtube_listener():
 
 def test_youtube_listener_node(mock_youtube_listener):
     input_key = ["video_id"]
-    output_key = ["messages"]
+    output_key = ["youtube_comments"]
 
     graph_builder = StateGraph(State)
     graph_builder.add_node(
@@ -39,7 +39,7 @@ def test_youtube_listener_node(mock_youtube_listener):
     }
     result_state = graph.invoke(state, debug=True)
 
-    assert "messages" in result_state, "Messages key should exist in the result state."
-    assert len(result_state["messages"]) == 2, "There should be 2 messages in the result."
-    assert result_state["messages"][0] == "This is a test comment."
-    assert result_state["messages"][1] == "Another test comment."
+    assert "youtube_comments" in result_state, "Messages key should exist in the result state."
+    assert len(result_state["youtube_comments"]) == 2, "There should be 2 messages in the result."
+    assert result_state["youtube_comments"][0] == "This is a test comment."
+    assert result_state["youtube_comments"][1] == "Another test comment."
