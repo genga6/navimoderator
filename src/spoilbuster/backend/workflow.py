@@ -36,7 +36,7 @@ class SpoilBusterWorkflow:
             "game_data_node",
             NodeFactory.create_node(
                 node_name="game_data_node",
-                input_key=["game_title"],
+                input_key=["youtube_comments", "game_title"],
                 output_key=["game_flagged_comments", "game_info"],
             ), 
         )
