@@ -32,7 +32,7 @@ class UserProgressNode(Node):
             elif cumulative_play_time:
                 min_time, max_time = map(int, cumulative_play_time.split("-"))
             else:
-                raise ValueError("No user progress data found.")
+                return None
 
             adjusted_min = min_time + stream_duration
             adjusted_max = max_time + stream_duration
