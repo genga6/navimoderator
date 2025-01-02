@@ -1,8 +1,9 @@
 import os
 from spoilbuster.backend.core.node import Node
+from spoilbuster.backend.nodes.comment_listener.base_listener_node import BaseListenerNode
 from googleapiclient.discovery import build
 
-class YoutubeListenerNode(Node):
+class YoutubeListenerNode(Node, BaseListenerNode):
     def __init__(
         self, 
         input_key: list[str], 
@@ -13,7 +14,7 @@ class YoutubeListenerNode(Node):
         if not self.youtube_api_key:
             raise ValueError("YOUTUBE_API_KEY is not set in the environment variables")
         
-    def _fetch_live_chat_messages(self, video_id: str) -> list[str]:
+    def _fetch_comments(self, video_id: str) -> list[str]:
         youtube = build("youtube", "v3", developerKey=self.youtube_api_key)
 
         video_response = youtube.videos().list(
@@ -23,20 +24,24 @@ class YoutubeListenerNode(Node):
         live_details = video_response["items"][0]["liveStreamingDetails"]
         live_chat_id = live_details["activeLiveChatId"]
 
-        messages_response = youtube.liveChatMessages().list(
+        comments_response = youtube.liveChatMessages().list(
             liveChatId=live_chat_id,
             part="snippet, authorDetails",
             maxResults=200, 
         ).execute()
 
-        messages = []
-        for item in messages_response["items"]:
-            message = item["snippet"]["displayMessage"]
-            messages.append(message)
-        return messages
+        comments = []
+        for item in comments_response["items"]:
+            comment = item["snippet"]["displayMessage"]
+            comments.append(comment)
+        return comments
+    
+    def _process_comments(self, comments: list) -> list[str]:
+        return comments
 
     def execute(self, state) -> dict:
         video_id = state[self.input_key[0]]
-        messages = self._fetch_live_chat_messages(video_id)
-        state[self.output_key[0]] = messages
+        comments = self._fetch_comments(video_id)
+        processed_comments = self._process_comments(comments)
+        state[self.output_key[0]] = processed_comments
         return state
