@@ -5,8 +5,8 @@ from spoilbuster.backend.core.factory import NodeFactory
 
 class State(TypedDict):
     video_id: str
-    game_title: str
-    game_info: dict
+    content_title: str
+    content_data: dict
     user_progress: str
     youtube_comments: list[str]
     game_flagged_comments: list[str]

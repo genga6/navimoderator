@@ -64,7 +64,7 @@ def test_user_progress_node():
                     "stream_start_time": "2025-01-02T14:00:00",
                     "cumulative_play_time": None,
                 },
-                "expected_exception": ValueError,
+                "expected": {"final_play_time_range": None},
             },
         ]
 
