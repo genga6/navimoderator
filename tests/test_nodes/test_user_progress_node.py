@@ -1,5 +1,5 @@
 import pytest
-from spoilbuster.backend.nodes.user_progress_node import UserProgressNode
+from navimoderator.backend.nodes.user_progress_node import UserProgressNode
 from langgraph.graph import StateGraph
 from typing import TypedDict
 from freezegun import freeze_time

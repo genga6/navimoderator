@@ -1,5 +1,5 @@
 import pytest
-from spoilbuster.backend.nodes.comment_listener.youtube_listener_node import YoutubeListenerNode
+from navimoderator.backend.nodes.comment_listener.youtube_listener_node import YoutubeListenerNode
 from langgraph.graph import StateGraph
 from typing import TypedDict
 from unittest.mock import patch

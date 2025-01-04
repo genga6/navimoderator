@@ -6,6 +6,6 @@ services:
     env_file:
       - ../.env
     volumes:
-      - ..:/workspaces/spoilbuster:cached
+      - ..:/workspaces/NaviModerator:cached
     environment:
-      - PYTHONPATH=/workspaces/spoilbuster/src
+      - PYTHONPATH=/workspaces/NaviModerator/src

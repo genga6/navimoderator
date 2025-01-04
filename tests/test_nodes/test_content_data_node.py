@@ -1,5 +1,5 @@
 import pytest
-from spoilbuster.backend.nodes.content_data_node import ContentDataNode
+from navimoderator.backend.nodes.content_data_node import ContentDataNode
 from langgraph.graph import StateGraph
 from typing import TypedDict
 

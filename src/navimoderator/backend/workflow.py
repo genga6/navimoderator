@@ -1,6 +1,6 @@
 from typing import TypedDict
 from langgraph.graph import StateGraph
-from spoilbuster.backend.core.factory import NodeFactory
+from navimoderator.backend.core.factory import NodeFactory
 
 
 class State(TypedDict):
