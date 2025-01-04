@@ -1,7 +1,7 @@
-from spoilbuster.backend.core.node import Node
-from spoilbuster.backend.nodes.comment_listener.youtube_listener_node import YoutubeListenerNode
-from spoilbuster.backend.nodes.content_data_node import ContentDataNode
-from spoilbuster.backend.nodes.structured_llm_node import StructuredLLMNode
+from navimoderator.backend.core.node import Node
+from navimoderator.backend.nodes.comment_listener.youtube_listener_node import YoutubeListenerNode
+from navimoderator.backend.nodes.content_data_node import ContentDataNode
+from navimoderator.backend.nodes.structured_llm_node import StructuredLLMNode
 
 NODE_MAPPING = {
     "youtube_listener_node": YoutubeListenerNode,

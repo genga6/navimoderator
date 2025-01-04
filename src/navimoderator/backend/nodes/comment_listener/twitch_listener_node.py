@@ -1,6 +1,6 @@
 import os
-from spoilbuster.backend.core.node import Node
-from spoilbuster.backend.nodes.comment_listener.base_listener_node import BaseListenerNode
+from navimoderator.backend.core.node import Node
+from navimoderator.backend.nodes.comment_listener.base_listener_node import BaseListenerNode
 
 
 class TwitchListenerNode(Node, BaseListenerNode):

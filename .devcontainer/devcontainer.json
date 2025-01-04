@@ -1,8 +1,8 @@
 {
-	"name": "spoilbuster",
+	"name": "navimoderator",
 	"dockerComposeFile": "docker-compose.yaml",
-	"service": "spoilbuster",
-	"workspaceFolder": "/workspaces/spoilbuster",
+	"service": "navimoderator",
+	"workspaceFolder": "/workspaces/navimoderator",
 	"overrideCommand": true,
 	"customizations": {
 		"vscode": {

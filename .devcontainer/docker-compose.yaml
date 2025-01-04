@@ -1,11 +1,11 @@
 services:
-  spoilbuster:
+  navimoderator:
     build:
       context: ../
       dockerfile: ./.devcontainer/dev.Dockerfile
     env_file:
       - ../.env
     volumes:
-      - ..:/workspaces/spoilbuster:cached
+      - ..:/workspaces/navimoderator:cached
     environment:
-      - PYTHONPATH=/workspaces/spoilbuster/src
+      - PYTHONPATH=/workspaces/navimoderator/src

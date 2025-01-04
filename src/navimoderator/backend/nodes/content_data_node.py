@@ -1,5 +1,5 @@
 import requests
-from spoilbuster.backend.core.node import Node
+from navimoderator.backend.core.node import Node
 
 class ContentDataNode(Node):
     def __init__(
@@ -10,7 +10,7 @@ class ContentDataNode(Node):
         super().__init__(input_key, output_key)
 
     def _fetch_content_data(self, content_title: str) -> dict:
-        pass    #TODO: WebSeeklyAPIから情報取得する
+        pass    #TODO: PerplexityAPIから情報取得する
 
     def execute(self, state) -> dict:
         content_title = state[self.input_key[0]]
