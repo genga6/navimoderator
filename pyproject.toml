@@ -50,4 +50,4 @@ ignore = ["E731","E741","F841","F821"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["NaviModerator*"]
+include = ["navimoderator*"]

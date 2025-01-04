@@ -1,8 +1,8 @@
 {
-	"name": "NaviModerator",
+	"name": "navimoderator",
 	"dockerComposeFile": "docker-compose.yaml",
-	"service": "NaviModerator",
-	"workspaceFolder": "/workspaces/NaviModerator",
+	"service": "navimoderator",
+	"workspaceFolder": "/workspaces/navimoderator",
 	"overrideCommand": true,
 	"customizations": {
 		"vscode": {
