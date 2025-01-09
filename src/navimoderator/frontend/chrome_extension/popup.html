@@ -1,13 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <title>Moderator Tool</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Navi Moderator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>YouTube Moderator Tool</h1>
-    <button id="authenticate">Link Moderator Account</button>
-    <p id="status">Not authenticated</p>
+    <div class="container">
+        <h1 class="title">Navi Moderator</h1>
+
+        <!-- オン/オフスイッチ -->
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" id="toggleSwitch" checked>
+                <span class="slider"></span>
+            </label>
+            <span id="switchLabel">ON</span>
+        </div>
+
+        <!-- タブメニュー -->
+        <div class="tab-menu">
+            <button class="tab-link active" data-tab="moderator">モデレーター設定</button>
+            <button class="tab-link" data-tab="stream">配信設定</button>
+            <button class="tab-link" data-tab="others">高度設定</button>
+        </div>
+
+        <!-- タブの内容 -->
+        <div id="moderator" class="tab-content active">
+            <h2>モデレーター設定</h2>
+            <div id="login-section">
+                <h2>Googleアカウントでログイン</h2>
+                <p>Navi Moderatorを有効にするには、Googleアカウントでログインしてください。</p>
+                <p class="privacy-note">
+                    <strong>安心してください：</strong>この操作であなたのパスワードが共有されることはありません。
+                    必要な権限のみを取得し、安全に配信をサポートします。
+                </p>
+                <button id="google-login-button" class="google-login">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Googleでログイン">
+                </button>
+            </div>
+            
+
+            <h2>詳細設定</h2>
+            <div class="setting-item">
+                <span>ルール違反のコメント削除</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <div class="tooltip-container">
+                    <span class="tooltip-icon" tabindex="0" aria-label="詳細情報">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                            <circle cx="12" cy="12" r="10" fill="#4caf50"></circle>
+                            <text x="12" y="16" font-size="12" fill="#ffffff" text-anchor="middle" font-family="Arial, sans-serif">
+                                ？
+                            </text>
+                        </svg>
+                    </span>
+                    <div class="tooltip-text">暴力的表現やスパムを自動検出して削除します。</div>
+                </div>
+            </div>
+
+            <div class="setting-item">
+                <span>タイムアウト権限</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <div class="tooltip-container">
+                    <span class="tooltip-icon" tabindex="0" aria-label="詳細情報">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                            <circle cx="12" cy="12" r="10" fill="#4caf50"></circle>
+                            <text x="12" y="16" font-size="12" fill="#ffffff" text-anchor="middle" font-family="Arial, sans-serif">
+                                i
+                            </text>
+                        </svg>
+                    </span>
+                    <div class="tooltip-text">AIモデレータにタイムアウト権限を付与します。</div>
+                </div>
+            </div>  
+            
+            <div class="setting-item">
+                <span>自動返信機能</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <div class="tooltip-container">
+                    <span class="tooltip-icon" tabindex="0" aria-label="詳細情報">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                            <circle cx="12" cy="12" r="10" fill="#4caf50"></circle>
+                            <text x="12" y="16" font-size="12" fill="#ffffff" text-anchor="middle" font-family="Arial, sans-serif">
+                                i
+                            </text>
+                        </svg>
+                    </span>
+                    <div class="tooltip-text">概要欄の内容に合わせて返信します。</div>
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <span>ネタバレ検出機能</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <div class="tooltip-container">
+                    <span class="tooltip-icon" tabindex="0" aria-label="詳細情報">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                            <circle cx="12" cy="12" r="10" fill="#4caf50"></circle>
+                            <text x="12" y="16" font-size="12" fill="#ffffff" text-anchor="middle" font-family="Arial, sans-serif">
+                                i
+                            </text>
+                        </svg>
+                    </span>
+                    <div class="tooltip-text">進行状況に応じたネタバレを検出して警告します。</div>
+                </div>
+            </div>          
+
+        </div>
+        <div id="stream" class="tab-content">
+            <h2>配信設定</h2>
+            ・配信者のチャンネルURLまたは、配信動画のID　（ホバーで説明「配信が開始されたら～」）　入力欄
+
+            詳細設定
+            <ul>
+                <li>
+                    配信開始時に自動投稿する　「あいさつ文」
+                    配信テーマ　任意（ゲーム、映画、アニメ、etc）
+                    コンテンツタイトル　任意（）
+                    進行状況（初見（0%～）、序盤（25%～）など）
+                </li>
+            </ul>
+        </div>
+        <div id="others" class="tab-content">
+            <h2>高度設定</h2>
+            <ul>
+                <li>カスタムフィルター：配信者独自の禁止用語やルール</li>
+                <li>AIモデレータの詳細ロジック：トリガー条件、アクション設定、「条件を追加するif-thenロジック」</li>
+            </ul>
+            <input type="text" id="othersInput" placeholder="設定を入力">
+        </div>
+    </div>
+
     <script src="popup.js"></script>
 </body>
 </html>

@@ -12,12 +12,18 @@
     "host_permissions": [
       "https://www.googleapis.com/*"
     ],
+    "web_accessible_resources": [
+      {
+        "resources": ["config.js"],
+        "matches": ["<all_urls>"]
+      }
+    ],
     "background": {
       "service_worker": "background.js"
     },
     "action": {
-      "default_popup": "popup.html",
-      "default_icon": "icon.png"
+      "default_popup": "popup.html"
     }
+    
   }
   
