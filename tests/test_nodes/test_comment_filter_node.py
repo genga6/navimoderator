@@ -1,5 +1,5 @@
 import pytest
-from navimoderator.backend.nodes.comment_filter_node import CommentFilterNode
+from navimoderator.backend.nodes.spoiler_detection.comment_filter_node import CommentFilterNode
 from langgraph.graph import StateGraph
 from typing import TypedDict
 
