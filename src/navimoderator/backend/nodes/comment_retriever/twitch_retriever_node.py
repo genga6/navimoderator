@@ -1,9 +1,9 @@
 import os
 from navimoderator.backend.core.node import Node
-from navimoderator.backend.nodes.comment_listener.base_listener_node import BaseListenerNode
+from navimoderator.backend.nodes.comment_retriever.base_retriever_node import BaseRetrieverNode
 
 
-class TwitchListenerNode(Node, BaseListenerNode):
+class TwitchListenerNode(Node, BaseRetrieverNode):
     def __init__(
         self, 
         input_key: list[str], 

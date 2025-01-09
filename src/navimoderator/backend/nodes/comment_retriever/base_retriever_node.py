@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class BaseListenerNode(ABC):
+class BaseRetrieverNode(ABC):
     @abstractmethod
     def _fetch_comments(self, video_id: str) -> list[str]:
         pass
