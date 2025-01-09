@@ -3,7 +3,6 @@ async function loadConfig() {
         const response = await fetch(chrome.runtime.getURL("config.js"));
         const scriptText = await response.text();
 
-        // 動的にスクリプトを評価
         eval(scriptText);
 
         if (CONFIG && CONFIG.CLIENT_ID) {
