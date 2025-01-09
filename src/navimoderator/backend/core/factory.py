@@ -1,11 +1,11 @@
 from navimoderator.backend.core.node import Node
 from navimoderator.backend.nodes.comment_retriever.youtube_retriever_node import YoutubeRetrieverNode
-from navimoderator.backend.nodes.spoiler_detection.content_data_node import ContentDataNode
+# from navimoderator.backend.nodes.spoiler_detection.content_data_node import ContentDataNode
 from navimoderator.backend.nodes.structured_llm_node import StructuredLLMNode
 
 NODE_MAPPING = {
     "youtube_retriever_node": YoutubeRetrieverNode,
-    "content_data_node": ContentDataNode,
+    # "content_data_node": ContentDataNode,
     "structured_llm_node": StructuredLLMNode,
 }
 class NodeFactory:

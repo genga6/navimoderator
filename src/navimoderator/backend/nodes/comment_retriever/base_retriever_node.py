@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
+from typing import AsyncIterator
 
 class BaseRetrieverNode(ABC):
     @abstractmethod
-    def _fetch_comments(self, video_id: str) -> list[str]:
-        pass
-
-    @abstractmethod
-    def _process_comments(self, comments) -> list[str]:
+    def _fetch_comments(self, streamer_id: str) -> AsyncIterator[dict]:
         pass

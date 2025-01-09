@@ -33,6 +33,7 @@ dependencies = [
     "torch>=2.5.1",
     "fugashi>=1.4.0",
     "unidic-lite>=1.0.8",
+    "twitchio>=2.10.0",
 ]
 
 [tool.uv]
