@@ -14,3 +14,5 @@ env/
 Thumbs.db
 
 /test/output_data/
+
+/workspaces/navimoderator/src/navimoderator/frontend/chrome_extension/config.js

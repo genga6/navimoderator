@@ -1,5 +1,5 @@
 import ast
-from spoilbuster.backend.core.node import Node
+from navimoderator.backend.core.node import Node
 from litellm import completion
 from jinja2 import Environment
 from pydantic import BaseModel, create_model

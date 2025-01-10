@@ -1,9 +1,9 @@
 import os
-from spoilbuster.backend.core.node import Node
-from spoilbuster.backend.nodes.comment_listener.base_listener_node import BaseListenerNode
+from navimoderator.backend.core.node import Node
+from navimoderator.backend.nodes.comment_retriever.base_retriever_node import BaseRetrieverNode
 from googleapiclient.discovery import build
 
-class YoutubeListenerNode(Node, BaseListenerNode):
+class YoutubeRetrieverNode(Node, BaseRetrieverNode):
     def __init__(
         self, 
         input_key: list[str], 

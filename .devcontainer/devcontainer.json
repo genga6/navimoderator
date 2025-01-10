@@ -1,8 +1,8 @@
 {
-	"name": "spoilbuster",
+	"name": "navimoderator-chat-monitoring",
 	"dockerComposeFile": "docker-compose.yaml",
-	"service": "spoilbuster",
-	"workspaceFolder": "/workspaces/spoilbuster",
+	"service": "navimoderator-chat-monitoring",
+	"workspaceFolder": "/workspaces/navimoderator-chat-monitoring",
 	"overrideCommand": true,
 	"customizations": {
 		"vscode": {

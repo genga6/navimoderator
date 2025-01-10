@@ -1,5 +1,5 @@
 [project]
-name = "spoilbuster"
+name = "NaviModerator-Chat-Monitoring"
 version = "0.0.1"
 description = "Add your description here"
 readme = "README.md"
@@ -27,11 +27,14 @@ dependencies = [
     "fastapi>=0.115.5",
     "google-api-python-client>=2.156.0",
     "freezegun>=1.5.1",
+    "emoji>=2.14.0",
+    "transformers>=4.47.1",
+    "mecab-python3>=1.0.10",
+    "torch>=2.5.1",
+    "fugashi>=1.4.0",
+    "unidic-lite>=1.0.8",
+    "twitchio>=2.10.0",
 ]
-
-[project.urls]
-Homepage = "https://www.autores.one/english"
-Issues = "https://github.com/auto-res/researchgraph/issues"
 
 [tool.uv]
 dev-dependencies = [
@@ -48,4 +51,4 @@ ignore = ["E731","E741","F841","F821"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["researchgraph*"]
+include = ["navimoderator-chat-monitoring*"]

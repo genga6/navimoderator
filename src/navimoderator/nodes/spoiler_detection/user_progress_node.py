@@ -1,5 +1,5 @@
 import pytz
-from spoilbuster.backend.core.node import Node
+from navimoderator.backend.core.node import Node
 from datetime import datetime
 
 class UserProgressNode(Node):
