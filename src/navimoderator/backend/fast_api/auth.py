@@ -1,6 +1,5 @@
 import os
 import httpx
-from dotenv import load_dotenv
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import RedirectResponse
 
@@ -49,7 +48,7 @@ async def twitch_callback(request: Request):
     refresh_token = tokens["refresh_token"]
 
     headers = {
-        "AUthorization": f"Bearer {access_token}",
+        "Authorization": f"Bearer {access_token}",
         "Client-ID": CLIENT_ID
     }
     async with httpx.AsyncClient() as client:
