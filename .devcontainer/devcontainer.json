@@ -1,8 +1,8 @@
 {
-	"name": "navimoderator-chat-monitoring",
+	"name": "navimoderator",
 	"dockerComposeFile": "docker-compose.yaml",
-	"service": "navimoderator-chat-monitoring",
-	"workspaceFolder": "/workspaces/navimoderator-chat-monitoring",
+	"service": "navimoderator",
+	"workspaceFolder": "/workspaces/navimoderator",
 	"overrideCommand": true,
 	"customizations": {
 		"vscode": {
