@@ -1,17 +1,20 @@
 from langgraph.graph import START, END, StateGraph
 from langgraph.graph.graph import CompiledGraph
-from typing import TypedDict
+from typing import TypedDict, Optional
 
-from preprocess_node import PreprocessNode
-from process_node import ProcessNode
-from action_node import ActionNode
+from .preprocess_node import PreprocessNode
+from .process_node import ProcessNode
+from .action_node import ActionNode
 
 
 class NaviModeratorState(TypedDict):
-    comments: list
-    preprocessed_comments: list
-    processed_comments: list
-    action: str
+    streamer_login: str
+    access_token: str
+    refresh_token: str
+    user_id: str
+    comments: list[dict]
+    preprocessed_comments: Optional[list[dict]]
+    processed_comments: Optional[list[dict]]
 
 
 class NaviModerator:
@@ -22,24 +25,18 @@ class NaviModerator:
 
     def _preprocess_node(self, state: NaviModeratorState) -> dict:
         comments = state["comments"]
-        preprocessed_comments = PreprocessNode(
-
-        ).execute(comments)
+        preprocessed_comments = PreprocessNode().execute(comments)
         return {"preprocessed_comments": preprocessed_comments}
 
     def _process_node(self, state: NaviModeratorState) -> dict:
         preprocessed_comments = state["preprocessed_comments"]
-        processed_comments = ProcessNode(
-
-        ).execute(preprocessed_comments)
+        processed_comments = ProcessNode().execute(preprocessed_comments)
         return {"processed_comments": processed_comments}
 
     def _action_node(self, state: NaviModeratorState) -> dict:
         processed_comments = state["processed_comments"]
-        action = ActionNode(
-
-        ).execute(processed_comments)
-        return {"action": action}
+        processed_comments = ActionNode().execute(processed_comments)
+        return {"processed_comment": processed_comments}
 
     def build_graph(self) -> CompiledGraph:
         graph_builder = StateGraph(NaviModeratorState)
@@ -58,9 +55,28 @@ class NaviModerator:
 
 if __name__ == "__main__":
 
-    comments = ["これは", "テスト", "データです。"]
+    comments = [
+        {
+        "timestamp": "2025-03-14T12:34:56Z", 
+        "user_name": "@someone_in_chat", 
+        "comment_id": "xxxx", 
+        "comment": "Hello!", 
+        }, 
+        {
+        "timestamp": "2025-03-14T12:34:56Z", 
+        "user_name": "@someone_in_chat", 
+        "comment_id": "xxxx", 
+        "comment": "これは誹謗中傷コメントです", 
+        }, 
+    ]
     input_data = {
-        "comments": comments
+        "streamer_login": "test", 
+        "access_token": "test", 
+        "refresh_token": "test", 
+        "user_id": "test", 
+        "comments": comments, 
+        "preprocessed_comments": [], 
+        "processed_comments": [], 
     }
 
     nave_moderator = NaviModerator().build_graph()

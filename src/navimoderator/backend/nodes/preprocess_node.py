@@ -4,7 +4,7 @@ class PreprocessNode:
     def __init__(self):
         pass
 
-    def execute(self, comments: list) -> list:
+    def execute(self, comments: list[dict]) -> list[dict]:
         preprocessed_comments = comments
         print("Pre-processing of comments has been completed.")
         return preprocessed_comments
