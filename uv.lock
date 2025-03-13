@@ -2001,7 +2001,7 @@ wheels = [
 ]
 
 [[package]]
-name = "navimoderator"
+name = "navimoderator-chat-monitoring"
 version = "0.0.1"
 source = { virtual = "." }
 dependencies = [
