@@ -1,0 +1,71 @@
+name: Run Integration Test
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths: [
+      'src/navimoderator/backend/**', 
+      'tests/backend/**',
+      '.github/workflows/pytest.yml'
+    ]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test-fastapi-langgraph:
+    name: FastAPI - LangGraph
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        test_name: 
+          - moderate_comment
+        include:
+          - test_name: moderate_comment
+            test_file: test/backend/test_moderate.py
+
+    env:
+      GITHUB_WORKSPACE: ${{ github.workspace }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          curl -LsSf https://astral.sh/uv/0.5.5/install.sh | bash || exit 1
+          uv --version
+
+      - name: Start FastAPI server
+        run: |
+          uv run uvicorn navimoderator.backend.fast_api.main:app --host 127.0.0.1 --port 8000 &
+          FASTAPI_PID=$!
+          echo "FASTAPI_PID=$FASTAPI_PID" >> $GITHUB_ENV
+
+      - name: Wait for FastAPI to be ready
+        run: |
+          for i in {1..10}; do
+            if curl -s http://127.0.0.1:8000/docs > /dev/null; then
+              echo "FastAPI server is ready!"
+              exit 0
+            fi
+            echo "Waiting for FastAPI server... Attempt $i"
+            sleep 1
+          done
+          echo "FastAPI did not start in time."
+          exit 1
+
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
+
+      - name: Run pytest with coverage
+        run: uv run pytest --cov=navimoderator.backend --cov-branch -s ${{ matrix.test_file }}
+
+      - name: Stop FastAPI
+        if: always()
+        run: kill $FASTAPI_PID || true
