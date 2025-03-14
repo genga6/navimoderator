@@ -21,7 +21,7 @@ NaviModerator は、Twitch のコメントを取得し、AI による自動翻�
 
 以下は LangGraph によるワークフローです。
 
-![LangGraph ワークフロー](/workspaces/navimoderator/images/Navimoderator-2025-03-14.png)
+![LangGraph ワークフロー](images/Navimoderator-2025-03-14.png)
 
 ## インストール & セットアップ（開発中）
 リポジトリをクローンし、環境をセットアップしてください。
