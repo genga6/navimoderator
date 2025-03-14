@@ -6,9 +6,9 @@ class ActionNode:
         for comment in processed_comments:
             if comment.get("is_harassment", False):
                 comment["moderator_action"] = "delete"
-            elif comment.get("translated_text"):
+            elif comment.get("translated_comment"):
                 comment["moderator_action"] = "post"
-                comment["post_text"] = f"{comment['translated_text']} by {comment['user_name']}"
+                comment["post_text"] = f"{comment['translated_comment']} by {comment['user_name']}"
             else:
                 comment["moderator_action"] = "pass"
 

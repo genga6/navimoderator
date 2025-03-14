@@ -36,7 +36,7 @@ class ProcessNode:
             "user_name": "@someone_in_chat", 
             "comment_id": "xxxx", 
             "comment": "Hello!", 
-            "translated_text": "こんにちは!",
+            "translated_comment": "こんにちは!",
 	        "is_harassment": False,  
             }, 
             {
@@ -44,7 +44,7 @@ class ProcessNode:
             "user_name": "@someone_in_chat", 
             "comment_id": "xxxx", 
             "comment": "これは誹謗中傷コメントです", 
-            "translated_text": "",
+            "translated_comment": "",
 	        "is_harassment": True,  
             }, 
         ]
