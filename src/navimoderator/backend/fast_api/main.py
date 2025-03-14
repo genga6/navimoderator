@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from navimoderator.backend.fast_api.comments_router import router
+from navimoderator.backend.fast_api.comments import router
 
 app = FastAPI()
 
