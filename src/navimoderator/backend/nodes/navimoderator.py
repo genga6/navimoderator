@@ -7,44 +7,57 @@ from navimoderator.backend.nodes.process_node import ProcessNode
 from navimoderator.backend.nodes.action_node import ActionNode
 
 
+
+class NaviComment(TypedDict, total=False):
+    timestamp: str
+    user_name: str
+    comment_id: str
+    comment: str
+    translated_comment: str
+    is_harassment: bool
+    moderator_action: str   # "pass" or "post" or "delete"
+
 class NaviModeratorState(TypedDict):
     streamer_login: str
     access_token: str
     refresh_token: str
-    user_id: str
-    comments: list[dict]
-    preprocessed_comments: Optional[list[dict]]
-    processed_comments: Optional[list[dict]]
+    comments: list[NaviComment]
 
 
 class NaviModerator:
     def __init__(
-        self, 
+        self,
+        llm_name: str, 
+        compute_env: str, 
+        is_translation: bool, 
+        is_moderation: bool,  
     ):
-        pass
+        self.llm_name = llm_name
+        self.compute_env = compute_env
+        self.is_translation = is_translation
+        self.is_moderation = is_moderation
 
     def _preprocess_node(self, state: NaviModeratorState) -> dict:
         comments = state["comments"]
-        preprocessed_comments = PreprocessNode().execute(comments)
-        return {"preprocessed_comments": preprocessed_comments}
+        updated_comments = PreprocessNode().execute(comments)
+        return {"comments": updated_comments}
 
     def _process_node(self, state: NaviModeratorState) -> dict:
-        preprocessed_comments = state["preprocessed_comments"]
-        processed_comments = ProcessNode().execute(preprocessed_comments)
-        return {"processed_comments": processed_comments}
+        comments = state["comments"]
+        updated_comments = ProcessNode().execute(comments)
+        return {"comments": updated_comments}
 
     def _action_node(self, state: NaviModeratorState) -> dict:
-        processed_comments = state["processed_comments"]
-        processed_comments = ActionNode().execute(processed_comments)
-        return {"processed_comment": processed_comments}
+        comments = state["comments"]
+        updated_comments = ActionNode().execute(comments)
+        return {"comments": updated_comments}
     
     def _has_processed_comments(self, state: NaviModeratorState) -> str:
-        if state.get("processed_comments"):
+        comments = state["comments"]
+        if all("is_harassment" in c for c in comments):     #NOTE: `is_harassment`以外のフラグを検討する
             return "skip_processing" 
-        else:
-            return "do_processing"
+        return "do_processing"
                 
-
     def build_graph(self) -> CompiledGraph:
         graph_builder = StateGraph(NaviModeratorState)
         # make nodes
@@ -87,11 +100,19 @@ if __name__ == "__main__":
         "streamer_login": "test", 
         "access_token": "test", 
         "refresh_token": "test", 
-        "user_id": "test", 
         "comments": comments, 
-        "preprocessed_comments": [], 
-        "processed_comments": [], 
     }
 
-    navi_moderator = NaviModerator().build_graph()
+    llm_name = "llm_name"
+    compute_env = "browser"
+    is_translation = True
+    is_moderation = True
+
+    navi_moderator = NaviModerator(
+        llm_name=llm_name, 
+        compute_env=compute_env, 
+        is_translation=is_translation, 
+        is_moderation=is_moderation, 
+    ).build_graph()
     result = navi_moderator.invoke(input_data)
+    print(result)
