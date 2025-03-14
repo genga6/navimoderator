@@ -2,9 +2,9 @@ from langgraph.graph import START, END, StateGraph
 from langgraph.graph.graph import CompiledGraph
 from typing import TypedDict, Optional
 
-from .preprocess_node import PreprocessNode
-from .process_node import ProcessNode
-from .action_node import ActionNode
+from navimoderator.backend.nodes.preprocess_node import PreprocessNode
+from navimoderator.backend.nodes.process_node import ProcessNode
+from navimoderator.backend.nodes.action_node import ActionNode
 
 
 class NaviModeratorState(TypedDict):
@@ -37,6 +37,13 @@ class NaviModerator:
         processed_comments = state["processed_comments"]
         processed_comments = ActionNode().execute(processed_comments)
         return {"processed_comment": processed_comments}
+    
+    def _has_processed_comments(self, state: NaviModeratorState) -> str:
+        if state.get("processed_comments"):
+            return "skip_processing" 
+        else:
+            return "do_processing"
+                
 
     def build_graph(self) -> CompiledGraph:
         graph_builder = StateGraph(NaviModeratorState)
@@ -45,7 +52,14 @@ class NaviModerator:
         graph_builder.add_node("process_node", self._process_node)
         graph_builder.add_node("action_node", self._action_node)
         # make edges
-        graph_builder.add_edge(START, "preprocess_node")
+        graph_builder.add_conditional_edges(
+            START, 
+            path=self._has_processed_comments, 
+            path_map={
+                "do_processing": "preprocess_node", 
+                "skip_processing": "action_node"
+            }
+        )
         graph_builder.add_edge("preprocess_node", "process_node")
         graph_builder.add_edge("process_node", "action_node")        
         graph_builder.add_edge("action_node", END)
@@ -79,5 +93,5 @@ if __name__ == "__main__":
         "processed_comments": [], 
     }
 
-    nave_moderator = NaviModerator().build_graph()
-    result = nave_moderator.invoke(input_data)
+    navi_moderator = NaviModerator().build_graph()
+    result = navi_moderator.invoke(input_data)
